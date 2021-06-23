@@ -1,0 +1,23 @@
+
+<% if Helpers.is_logged_in?(session) %>
+    <h1> Tweet Details  </h1>
+    <h3>Author: <%=@tweet.user.username%></h3>
+    <hr>
+        
+    <h3>Content:</h3> 
+    <%= @tweet.content %>
+    <hr>
+    
+    <form method="GET" action="/tweets/<%=@tweet.id%>/edit">
+        <input type="submit" value="Edit Tweet" id="Edit Tweet">
+    </form>
+    
+    <form method="POST" action="/tweets/<%=@tweet.id%>">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Tweet" id="Delete Tweet">
+    </form>
+
+<% else %>
+    <h1> You Must Be Logged in to View Tweets </h1>
+    <% redirect '/login' %>
+<% end %>
